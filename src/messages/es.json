@@ -1,0 +1,41 @@
+{
+  "auth": {
+    "login": "Iniciar sesión con Google",
+    "logout": "Cerrar sesión"
+  },
+  "dashboard": {
+    "title": "Mis grupos",
+    "adminGroups": "Grupos donde soy administrador",
+    "memberGroups": "Grupos donde participo",
+    "noGroups": "Aún no formas parte de ningún grupo"
+  },
+  "groups": {
+    "create": "Crear un grupo",
+    "join": "Unirse a un grupo",
+    "inviteCode": "Código de invitación",
+    "inviteCodePlaceholder": "Introduce el código de 6 caracteres",
+    "drawPending": "Sorteo pendiente",
+    "drawDone": "Sorteo realizado",
+    "doAutomaticDraw": "Realizar el sorteo automáticamente",
+    "myRecipient": "Tu amigo invisible es",
+    "members": "{count} miembros",
+    "name": "Nombre del grupo",
+    "namePlaceholder": "Ej: Familia Navidad 2024",
+    "drawMode": "Modo de sorteo",
+    "drawModeAutomatic": "Automático",
+    "drawModeManual": "Manual"
+  },
+  "messages": {
+    "inbox": "Bandeja de entrada",
+    "send": "Enviar un mensaje",
+    "placeholder": "Escribe tu mensaje anónimo...",
+    "sender": "🎅 Amigo invisible",
+    "noMessages": "Aún no has recibido ningún mensaje",
+    "unread": "{count} sin leer"
+  },
+  "errors": {
+    "unauthorized": "No tienes permisos para realizar esta acción",
+    "noAssignment": "No tienes ninguna asignación en este grupo",
+    "groupNotFound": "Grupo no encontrado"
+  }
+}

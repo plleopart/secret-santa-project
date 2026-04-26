@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum DrawMode {
+  manual
+  automatic
+}
+
+model User {
+  keycloakId String   @id @map("keycloak_id")
+  email      String
+  name       String
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  adminOf     Group[]      @relation("GroupAdmin")
+  memberships GroupMember[]
+  giverOf     Assignment[] @relation("Giver")
+  receiverOf  Assignment[] @relation("Receiver")
+  messages    Message[]    @relation("Recipient")
+
+  @@map("users")
+}
+
+model Group {
+  id         String    @id @default(uuid())
+  name       String
+  inviteCode String    @unique @map("invite_code")
+  adminId    String    @map("admin_id")
+  drawMode   DrawMode  @map("draw_mode")
+  drawnAt    DateTime? @map("drawn_at")
+  createdAt  DateTime  @default(now()) @map("created_at")
+
+  admin       User          @relation("GroupAdmin", fields: [adminId], references: [keycloakId])
+  members     GroupMember[]
+  assignments Assignment[]
+  messages    Message[]
+
+  @@map("groups")
+}
+
+model GroupMember {
+  id       String   @id @default(uuid())
+  groupId  String   @map("group_id")
+  userId   String   @map("user_id")
+  joinedAt DateTime @default(now()) @map("joined_at")
+
+  group Group @relation(fields: [groupId], references: [id])
+  user  User  @relation(fields: [userId], references: [keycloakId])
+
+  @@unique([groupId, userId])
+  @@map("group_members")
+}
+
+model Assignment {
+  id         String @id @default(uuid())
+  groupId    String @map("group_id")
+  giverId    String @map("giver_id")
+  receiverId String @map("receiver_id")
+
+  group    Group @relation(fields: [groupId], references: [id])
+  giver    User  @relation("Giver", fields: [giverId], references: [keycloakId])
+  receiver User  @relation("Receiver", fields: [receiverId], references: [keycloakId])
+
+  @@unique([groupId, giverId])
+  @@map("assignments")
+}
+
+model Message {
+  id          String    @id @default(uuid())
+  groupId     String    @map("group_id")
+  recipientId String    @map("recipient_id")
+  body        String
+  readAt      DateTime? @map("read_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  group     Group @relation(fields: [groupId], references: [id])
+  recipient User  @relation("Recipient", fields: [recipientId], references: [keycloakId])
+
+  // No senderId — anonymity guaranteed at the data level
+
+  @@map("messages")
+}

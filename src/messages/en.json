@@ -1,0 +1,41 @@
+{
+  "auth": {
+    "login": "Sign in with Google",
+    "logout": "Sign out"
+  },
+  "dashboard": {
+    "title": "My groups",
+    "adminGroups": "Groups I administer",
+    "memberGroups": "Groups I participate in",
+    "noGroups": "You are not part of any group yet"
+  },
+  "groups": {
+    "create": "Create a group",
+    "join": "Join a group",
+    "inviteCode": "Invite code",
+    "inviteCodePlaceholder": "Enter the 6-character code",
+    "drawPending": "Draw pending",
+    "drawDone": "Draw done",
+    "doAutomaticDraw": "Perform automatic draw",
+    "myRecipient": "Your secret santa is",
+    "members": "{count} members",
+    "name": "Group name",
+    "namePlaceholder": "E.g. Family Christmas 2024",
+    "drawMode": "Draw mode",
+    "drawModeAutomatic": "Automatic",
+    "drawModeManual": "Manual"
+  },
+  "messages": {
+    "inbox": "Inbox",
+    "send": "Send a message",
+    "placeholder": "Write your anonymous message...",
+    "sender": "🎅 Secret Santa",
+    "noMessages": "You have not received any messages yet",
+    "unread": "{count} unread"
+  },
+  "errors": {
+    "unauthorized": "You do not have permission to perform this action",
+    "noAssignment": "You have no assignment in this group",
+    "groupNotFound": "Group not found"
+  }
+}

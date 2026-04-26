@@ -1,0 +1,41 @@
+{
+  "auth": {
+    "login": "Inicia sessió amb Google",
+    "logout": "Tanca la sessió"
+  },
+  "dashboard": {
+    "title": "Els meus grups",
+    "adminGroups": "Grups on soc administrador",
+    "memberGroups": "Grups on participo",
+    "noGroups": "Encara no formes part de cap grup"
+  },
+  "groups": {
+    "create": "Crea un grup",
+    "join": "Uneix-te a un grup",
+    "inviteCode": "Codi d'invitació",
+    "inviteCodePlaceholder": "Introdueix el codi de 6 caràcters",
+    "drawPending": "Sorteig pendent",
+    "drawDone": "Sorteig fet",
+    "doAutomaticDraw": "Fes el sorteig automàticament",
+    "myRecipient": "El teu amic invisible és",
+    "members": "{count} membres",
+    "name": "Nom del grup",
+    "namePlaceholder": "Ex: Família Nadal 2024",
+    "drawMode": "Mode de sorteig",
+    "drawModeAutomatic": "Automàtic",
+    "drawModeManual": "Manual"
+  },
+  "messages": {
+    "inbox": "Safata d'entrada",
+    "send": "Envia un missatge",
+    "placeholder": "Escriu el teu missatge anònim...",
+    "sender": "🎅 Amic invisible",
+    "noMessages": "Encara no has rebut cap missatge",
+    "unread": "{count} sense llegir"
+  },
+  "errors": {
+    "unauthorized": "No tens permisos per fer aquesta acció",
+    "noAssignment": "No tens cap assignació en aquest grup",
+    "groupNotFound": "Grup no trobat"
+  }
+}
