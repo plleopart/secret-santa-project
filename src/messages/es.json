@@ -5,7 +5,11 @@
   },
   "nav": {
     "dashboard": "Inicio",
-    "adminSection": "Admin"
+    "adminSection": "Administrador",
+    "overview": "Vista general",
+    "messages": "Mensajes",
+    "members": "Miembros",
+    "adminManage": "Administrar"
   },
   "dashboard": {
     "title": "Mis grupos",
@@ -57,7 +61,21 @@
     "errorAlreadyMember": "Ya eres miembro de este grupo",
     "errorInvalidCode": "Código de invitación no válido",
     "errorSelfAssignment": "Una persona no puede regalarse a sí misma",
-    "errorIncompleteAssignments": "Debes definir todas las asignaciones"
+    "errorIncompleteAssignments": "Debes definir todas las asignaciones",
+    "sendCardDirection": "Tú → {name}",
+    "sendCardTitle": "Envía un mensaje anónimo",
+    "sendCardSubtitle": "Pregunta lo que necesites sin revelar quién eres.",
+    "sendCardCta": "Escribir un mensaje",
+    "inboxCardDirection": "Amigo invisible → Tú",
+    "inboxCardTitle": "Tus mensajes",
+    "inboxCardSubtitle": "Lee los mensajes recibidos de tu amigo invisible.",
+    "inboxCardCta": "Ver mensajes",
+    "createdAt": "Creado el",
+    "wishlist": "Lista de deseos",
+    "wishlistEmpty": "Aún no hay artículos en la lista"
+  },
+  "adminPage": {
+    "noGroups": "Aún no administras ningún grupo"
   },
   "messages": {
     "inbox": "Bandeja de entrada",

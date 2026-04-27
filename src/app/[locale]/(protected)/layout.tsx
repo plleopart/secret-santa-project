@@ -27,17 +27,33 @@ export default async function ProtectedLayout({ children, params }: Props) {
     create: { keycloakId: session.user.id, email, name },
   })
 
-  const adminGroups = await prisma.group.findMany({
-    where: { adminId: session.user.id },
-    select: { id: true, name: true },
+  const userId = session.user.id
+  const rawNavGroups = await prisma.group.findMany({
+    where: { members: { some: { userId } } },
+    select: {
+      id: true,
+      name: true,
+      adminId: true,
+      messages: {
+        where: { recipientId: userId, readAt: null },
+        select: { id: true },
+      },
+    },
     orderBy: { createdAt: "desc" },
   })
+
+  const navGroups = rawNavGroups.map((g) => ({
+    id: g.id,
+    name: g.name,
+    isAdmin: g.adminId === userId,
+    unreadCount: g.messages.length,
+  }))
 
   return (
     <ProtectedShell
       userName={session.user.name ?? session.user.email}
       userEmail={session.user.email}
-      adminGroups={adminGroups}
+      navGroups={navGroups}
     >
       {children}
     </ProtectedShell>

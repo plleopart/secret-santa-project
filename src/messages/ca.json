@@ -5,7 +5,11 @@
   },
   "nav": {
     "dashboard": "Inici",
-    "adminSection": "Admin"
+    "adminSection": "Administrador",
+    "overview": "Visió general",
+    "messages": "Missatges",
+    "members": "Membres",
+    "adminManage": "Administrar"
   },
   "dashboard": {
     "title": "Els meus grups",
@@ -57,7 +61,21 @@
     "errorAlreadyMember": "Ja ets membre d'aquest grup",
     "errorInvalidCode": "Codi d'invitació no vàlid",
     "errorSelfAssignment": "Una persona no es pot regalar a si mateixa",
-    "errorIncompleteAssignments": "Has de definir totes les assignacions"
+    "errorIncompleteAssignments": "Has de definir totes les assignacions",
+    "sendCardDirection": "Tu → {name}",
+    "sendCardTitle": "Envia un missatge anònim",
+    "sendCardSubtitle": "Pregunta el que necessitis sense revelar qui ets.",
+    "sendCardCta": "Escriu un missatge",
+    "inboxCardDirection": "Amic invisible → Tu",
+    "inboxCardTitle": "Els teus missatges",
+    "inboxCardSubtitle": "Llegeix els missatges rebuts del teu amic invisible.",
+    "inboxCardCta": "Veure missatges",
+    "createdAt": "Creat el",
+    "wishlist": "Llista de desitjos",
+    "wishlistEmpty": "Encara no hi ha articles a la llista"
+  },
+  "adminPage": {
+    "noGroups": "Encara no administres cap grup"
   },
   "messages": {
     "inbox": "Safata d'entrada",

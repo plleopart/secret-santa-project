@@ -10,6 +10,7 @@ import {
   NavLink,
   Button,
   Box,
+  Badge,
 } from "@mantine/core"
 import { useMantineColorScheme } from "@mantine/core"
 import { useTranslations } from "next-intl"
@@ -21,30 +22,45 @@ import {
   IconMoon,
   IconLogout,
   IconShield,
+  IconInfoCircle,
+  IconMail,
+  IconUsers,
+  IconSettings,
 } from "@tabler/icons-react"
+
+interface NavGroup {
+  id: string
+  name: string
+  isAdmin: boolean
+  unreadCount: number
+}
 
 interface Props {
   userName: string
   userEmail: string
-  adminGroups: { id: string; name: string }[]
+  navGroups: NavGroup[]
 }
 
-export function AppNavbar({ userName, userEmail, adminGroups }: Props) {
+export function AppNavbar({ userName, userEmail, navGroups }: Props) {
   const t = useTranslations()
   const pathname = usePathname()
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
 
   const initial = userName.charAt(0).toUpperCase() || "?"
 
+  const groupMatch = pathname.match(/^\/groups\/([^/]+)/)
+  const currentGroupId = groupMatch?.[1] ?? null
+  const currentGroup = currentGroupId ? navGroups.find((g) => g.id === currentGroupId) : null
+  const isInAdminView =
+    currentGroupId !== null && pathname.startsWith(`/groups/${currentGroupId}/admin`)
+
   return (
     <Stack h="100%" justify="space-between" p="md" gap={0}>
-      {/* Logo */}
       <Box>
         <Text fw={700} size="lg" mb="xl" style={{ letterSpacing: "-0.3px" }}>
           🎅 Amic Invisible
         </Text>
 
-        {/* Navigation links */}
         <NavLink
           label={t("nav.dashboard")}
           leftSection={<IconHome size={16} />}
@@ -55,34 +71,97 @@ export function AppNavbar({ userName, userEmail, adminGroups }: Props) {
           styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
         />
 
-        {/* Admin groups section */}
-        {adminGroups.length > 0 && (
+        {/* Group-specific navigation — shown when inside a group in user view */}
+        {currentGroup && !isInAdminView && (
           <Box mt="md">
             <Text size="xs" fw={600} tt="uppercase" c="dimmed" px={12} mb={4}>
-              {t("nav.adminSection")}
+              {currentGroup.name}
             </Text>
-            {adminGroups.map((g) => (
+
+            <NavLink
+              label={t("nav.overview")}
+              leftSection={<IconInfoCircle size={15} />}
+              active={pathname === `/groups/${currentGroupId}`}
+              renderRoot={(props) => (
+                <Link
+                  href={`/groups/${currentGroupId}`}
+                  style={{ textDecoration: "none" }}
+                  {...props}
+                />
+              )}
+              styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
+            />
+
+            <NavLink
+              label={t("nav.messages")}
+              leftSection={<IconMail size={15} />}
+              rightSection={
+                currentGroup.unreadCount > 0 ? (
+                  <Badge size="xs" color="red" variant="filled" circle>
+                    {currentGroup.unreadCount}
+                  </Badge>
+                ) : undefined
+              }
+              active={
+                pathname.startsWith(`/groups/${currentGroupId}/messages`) ||
+                pathname.startsWith(`/groups/${currentGroupId}/send`)
+              }
+              renderRoot={(props) => (
+                <Link
+                  href={`/groups/${currentGroupId}/messages`}
+                  style={{ textDecoration: "none" }}
+                  {...props}
+                />
+              )}
+              styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
+            />
+
+            <NavLink
+              label={t("nav.members")}
+              leftSection={<IconUsers size={15} />}
+              active={pathname.startsWith(`/groups/${currentGroupId}/members`)}
+              renderRoot={(props) => (
+                <Link
+                  href={`/groups/${currentGroupId}/members`}
+                  style={{ textDecoration: "none" }}
+                  {...props}
+                />
+              )}
+              styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
+            />
+
+            {currentGroup.isAdmin && (
               <NavLink
-                key={g.id}
-                label={g.name}
-                leftSection={<IconShield size={15} />}
-                active={pathname === `/groups/${g.id}/admin`}
+                label={t("nav.adminManage")}
+                leftSection={<IconSettings size={15} />}
+                active={pathname.startsWith(`/groups/${currentGroupId}/admin`)}
                 renderRoot={(props) => (
                   <Link
-                    href={`/groups/${g.id}/admin`}
+                    href={`/groups/${currentGroupId}/admin`}
                     style={{ textDecoration: "none" }}
                     {...props}
                   />
                 )}
                 styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
               />
-            ))}
+            )}
           </Box>
         )}
+
       </Box>
 
-      {/* Bottom: user info + dark mode */}
+      {/* Bottom: admin link + user info + logout */}
       <Stack gap="sm">
+        <Divider />
+        <NavLink
+          label={t("nav.adminSection")}
+          leftSection={<IconShield size={15} />}
+          active={pathname === "/admin"}
+          renderRoot={(props) => (
+            <Link href="/admin" style={{ textDecoration: "none" }} {...props} />
+          )}
+          styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
+        />
         <Divider />
         <Group justify="space-between" wrap="nowrap">
           <Group gap="xs" wrap="nowrap" style={{ minWidth: 0 }}>

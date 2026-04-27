@@ -108,7 +108,24 @@ export async function getGroup(groupId: string) {
 
   const myAssignment = group.assignments.find((a) => a.giverId === uid) ?? null
 
-  return { group, isAdmin, myAssignment }
+  const unreadCount = await prisma.message.count({
+    where: { groupId, recipientId: uid, readAt: null },
+  })
+
+  return { group, isAdmin, myAssignment, unreadCount }
+}
+
+export async function listAdminGroups() {
+  const session = await auth()
+  if (!session?.user?.id) throw new Error("Unauthenticated")
+
+  const userId = session.user.id
+
+  return prisma.group.findMany({
+    where: { adminId: userId },
+    include: { members: true },
+    orderBy: { createdAt: "desc" },
+  })
 }
 
 export async function addMember(

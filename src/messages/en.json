@@ -5,7 +5,11 @@
   },
   "nav": {
     "dashboard": "Home",
-    "adminSection": "Admin"
+    "adminSection": "Administrator",
+    "overview": "Overview",
+    "messages": "Messages",
+    "members": "Members",
+    "adminManage": "Manage"
   },
   "dashboard": {
     "title": "My groups",
@@ -57,7 +61,21 @@
     "errorAlreadyMember": "You are already a member of this group",
     "errorInvalidCode": "Invalid invite code",
     "errorSelfAssignment": "A person cannot give to themselves",
-    "errorIncompleteAssignments": "You must define all assignments"
+    "errorIncompleteAssignments": "You must define all assignments",
+    "sendCardDirection": "You → {name}",
+    "sendCardTitle": "Send an anonymous message",
+    "sendCardSubtitle": "Ask what you need without revealing who you are.",
+    "sendCardCta": "Write a message",
+    "inboxCardDirection": "Secret Santa → You",
+    "inboxCardTitle": "Your messages",
+    "inboxCardSubtitle": "Read messages received from your secret santa.",
+    "inboxCardCta": "View messages",
+    "createdAt": "Created on",
+    "wishlist": "Wish list",
+    "wishlistEmpty": "No items in the wish list yet"
+  },
+  "adminPage": {
+    "noGroups": "You don't administer any groups yet"
   },
   "messages": {
     "inbox": "Inbox",

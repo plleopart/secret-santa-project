@@ -4,14 +4,21 @@ import { AppShell, Burger } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import { AppNavbar } from "./AppNavbar"
 
+interface NavGroup {
+  id: string
+  name: string
+  isAdmin: boolean
+  unreadCount: number
+}
+
 interface Props {
   children: React.ReactNode
   userName: string
   userEmail: string
-  adminGroups: { id: string; name: string }[]
+  navGroups: NavGroup[]
 }
 
-export function ProtectedShell({ children, userName, userEmail, adminGroups }: Props) {
+export function ProtectedShell({ children, userName, userEmail, navGroups }: Props) {
   const [opened, { toggle }] = useDisclosure()
 
   return (
@@ -24,7 +31,7 @@ export function ProtectedShell({ children, userName, userEmail, adminGroups }: P
       padding="xl"
     >
       <AppShell.Navbar>
-        <AppNavbar userName={userName} userEmail={userEmail} adminGroups={adminGroups} />
+        <AppNavbar userName={userName} userEmail={userEmail} navGroups={navGroups} />
       </AppShell.Navbar>
 
       <AppShell.Main>
