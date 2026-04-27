@@ -7,12 +7,11 @@ import {
   Avatar,
   Badge,
   Divider,
-  ThemeIcon,
 } from "@mantine/core"
 import { getTranslations } from "next-intl/server"
 import { getGroup } from "@/actions/groups"
 import { notFound } from "next/navigation"
-import { IconUsers, IconGift } from "@tabler/icons-react"
+import { IconUsers } from "@tabler/icons-react"
 
 export default async function MembersPage({
   params,
@@ -35,7 +34,6 @@ export default async function MembersPage({
     <Stack gap="xl" maw={720}>
       <Title order={2}>{t("nav.members")}</Title>
 
-      {/* Members list */}
       <Stack gap="md">
         <Divider
           label={
@@ -78,37 +76,6 @@ export default async function MembersPage({
             </Paper>
           ))}
         </Stack>
-      </Stack>
-
-      {/* Wishlist — placeholder for future feature */}
-      <Stack gap="md">
-        <Divider
-          label={
-            <Group gap="xs">
-              <IconGift size={13} />
-              <Text size="xs" fw={600} tt="uppercase" c="dimmed">
-                {t("groups.wishlist")}
-              </Text>
-            </Group>
-          }
-          labelPosition="left"
-        />
-
-        <Paper
-          withBorder
-          p="xl"
-          radius="md"
-          style={{ borderStyle: "dashed" }}
-        >
-          <Stack align="center" gap="xs">
-            <ThemeIcon size="xl" variant="light" color="gray" radius="xl">
-              <IconGift size={24} />
-            </ThemeIcon>
-            <Text size="sm" c="dimmed" ta="center">
-              {t("groups.wishlistEmpty")}
-            </Text>
-          </Stack>
-        </Paper>
       </Stack>
     </Stack>
   )

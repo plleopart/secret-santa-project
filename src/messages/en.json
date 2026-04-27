@@ -9,7 +9,8 @@
     "overview": "Overview",
     "messages": "Messages",
     "members": "Members",
-    "adminManage": "Manage"
+    "adminManage": "Manage",
+    "wishlist": "Wish list"
   },
   "dashboard": {
     "title": "My groups",
@@ -70,6 +71,7 @@
     "inboxCardTitle": "Your messages",
     "inboxCardSubtitle": "Read messages received from your secret santa.",
     "inboxCardCta": "View messages",
+    "noNewMessages": "No new messages",
     "createdAt": "Created on",
     "wishlist": "Wish list",
     "wishlistEmpty": "No items in the wish list yet"

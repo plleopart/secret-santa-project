@@ -25,7 +25,7 @@ import {
   IconInfoCircle,
   IconMail,
   IconUsers,
-  IconSettings,
+  IconGift,
 } from "@tabler/icons-react"
 
 interface NavGroup {
@@ -130,21 +130,20 @@ export function AppNavbar({ userName, userEmail, navGroups }: Props) {
               styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
             />
 
-            {currentGroup.isAdmin && (
-              <NavLink
-                label={t("nav.adminManage")}
-                leftSection={<IconSettings size={15} />}
-                active={pathname.startsWith(`/groups/${currentGroupId}/admin`)}
-                renderRoot={(props) => (
-                  <Link
-                    href={`/groups/${currentGroupId}/admin`}
-                    style={{ textDecoration: "none" }}
-                    {...props}
-                  />
-                )}
-                styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
-              />
-            )}
+            <NavLink
+              label={t("nav.wishlist")}
+              leftSection={<IconGift size={15} />}
+              active={pathname.startsWith(`/groups/${currentGroupId}/wishlist`)}
+              renderRoot={(props) => (
+                <Link
+                  href={`/groups/${currentGroupId}/wishlist`}
+                  style={{ textDecoration: "none" }}
+                  {...props}
+                />
+              )}
+              styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
+            />
+
           </Box>
         )}
 

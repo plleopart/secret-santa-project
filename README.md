@@ -12,6 +12,7 @@ A web app for managing anonymous messaging within a Secret Santa group. When som
 - Sign in with Google via **Keycloak** (OIDC)
 - Session managed by **NextAuth v5**
 - Automatic user record upsert on every authenticated request
+- "Guest" members can be added by admin before they have a Keycloak account; their record is promoted on first login
 
 ### Groups
 - **Create** a Secret Santa group with a name and draw mode
@@ -21,15 +22,25 @@ A web app for managing anonymous messaging within a Secret Santa group. When som
 
 ### Dashboard
 - Overview of all your groups (admin and member)
-- Status badges: draw pending / draw done / unread messages
-- Member count per group
+- Status badges: draw pending / draw done
+- Unread message count per group
 - Dark / light mode toggle
 
-### Group detail
-- Full member list with name and email
-- Admin-only: invite code display with one-click copy
-- Admin-only: **add members directly** by name + email (no login required for them)
-- Add member button disabled once the draw is done
+### Sidebar navigation
+- Contextual: group-specific items (overview, messages, members, wish list) appear when navigating a group in user view
+- **Administrator** section pinned to the bottom — dedicated screen listing all groups you manage
+- Admin view and user view are fully separated: admin items never show in the user sidebar and vice versa
+
+### Group overview
+- Creation date, member count, draw status
+- Message status card: always visible, highlights unread count when applicable
+- My assignment card (shown after the draw)
+
+### Group members
+- Full member list with name, email, and admin badge
+
+### Wish list
+- Dedicated page per group *(feature placeholder — coming soon)*
 
 ### Draw — Automatic mode
 - Admin triggers the draw with a confirmation step
@@ -40,7 +51,19 @@ A web app for managing anonymous messaging within a Secret Santa group. When som
 ### Draw — Manual mode
 - Admin defines who gives to whom via a dropdown editor
 - Validation: no duplicates, no self-assignments, all members must be assigned
-- Same read-only assignment view once saved
+- Read-only view once saved
+
+### Anonymous messaging
+- **Hub page**: two cards (Send / Inbox) with per-card unread badges so the user knows exactly where to look
+- **Send page** (`/send`): compose anonymous messages to your recipient; view the full conversation thread including replies received
+- **Inbox page** (`/messages/inbox`): read messages from your anonymous giver; reply up to 5 times per round
+- **Admin view** (`/admin`): full message log for the group, visible only to the group admin
+
+---
+
+## 🔒 Anonymity guarantee
+
+The `messages` table has **no `sender_id` column**. Sender identity is validated at the Server Action level (checking the `assignments` table) but is never persisted. Not even a bug, an admin query, or a database dump can reveal who sent a message.
 
 ---
 
@@ -51,17 +74,11 @@ A web app for managing anonymous messaging within a Secret Santa group. When som
 | Framework | Next.js 16 (App Router, Turbopack) |
 | Language | TypeScript (strict) |
 | UI | Mantine UI 9 |
-| ORM | Prisma 7 |
+| ORM | Prisma 7 + `@prisma/adapter-pg` |
 | Database | PostgreSQL |
 | Auth | Keycloak (OIDC) + NextAuth v5 |
 | i18n | next-intl (Catalan · Spanish · English) |
 | Server logic | Next.js Server Actions (no API routes) |
-
----
-
-## 🔒 Anonymity guarantee
-
-The `messages` table has **no `sender_id` column**. Sender identity is validated at the Server Action level (checking the `assignments` table) but is never persisted. Not even a bug, an admin query, or a database dump can reveal who sent a message.
 
 ---
 
@@ -113,21 +130,32 @@ Open [http://localhost:3000](http://localhost:3000).
 ```
 src/
   actions/          # Server Actions (all business logic lives here)
-    groups.ts       # listMyGroups, createGroup, joinGroup, getGroup, addMember
-    draw.ts         # performDraw (Fisher-Yates), setManualAssignments
-    messages.ts     # sendMessage, getMyMessages, markAsRead
-    admin.ts        # getGroupAssignments, getGroupMessages
     auth.ts         # logout
+    groups.ts       # listMyGroups, createGroup, joinGroup, getGroup,
+                    #   addMember, listAdminGroups
+    draw.ts         # performDraw (Fisher-Yates), setManualAssignments
+    messages.ts     # sendMessage, sendReply, getReplyStatus, markAllRead
+    admin.ts        # getGroupAssignments, getGroupMessages
   app/
     [locale]/
-      (auth)/       # Login page (no AppShell)
-      (protected)/  # Authenticated pages with sidebar layout
+      (auth)/               # Login page (no AppShell)
+      (protected)/          # Authenticated pages with sidebar layout
+        admin/              # Administrator dashboard
         dashboard/
         groups/[groupId]/
+          page.tsx          # Group overview
+          members/          # Member list
+          wishlist/         # Wish list (placeholder)
+          messages/
+            page.tsx        # Messaging hub (2 cards with unread badges)
+            inbox/          # Inbox: received messages + reply form
+          send/             # Send anonymous message + conversation
+          admin/            # Admin: draw, members, all messages
   components/
-    layout/         # AppNavbar, ProtectedShell (AppShell wrapper)
-    groups/         # GroupCard, AddMemberModal, AutoDrawSection,
-                    # ManualAssignmentEditor, DashboardActions, InviteCodeBadge
+    layout/         # AppNavbar (contextual sidebar), ProtectedShell
+    groups/         # GroupCard, GroupMessagingActions, AddMemberModal,
+                    # AutoDrawSection, ManualAssignmentEditor, InviteCodeBadge
+    messages/       # AnonymousMessageForm, ReplyForm
   i18n/             # next-intl routing + navigation helpers
   lib/              # auth.ts (NextAuth), prisma.ts, theme.ts
   messages/         # ca.json · es.json · en.json
@@ -137,9 +165,7 @@ src/
 
 ## 🗺️ Roadmap
 
-- [ ] Anonymous messaging inbox (`/groups/[groupId]/messages`)
-- [ ] Send anonymous message (`/groups/[groupId]/send`)
-- [ ] Admin message viewer (`/groups/[groupId]/admin`)
+- [ ] Wish list: add/remove items, visible only to your assigned giver
 - [ ] Toast notifications for actions
 - [ ] Email notifications (optional)
 

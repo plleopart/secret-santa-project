@@ -9,7 +9,8 @@
     "overview": "Visió general",
     "messages": "Missatges",
     "members": "Membres",
-    "adminManage": "Administrar"
+    "adminManage": "Administrar",
+    "wishlist": "Llista de desitjos"
   },
   "dashboard": {
     "title": "Els meus grups",
@@ -70,6 +71,7 @@
     "inboxCardTitle": "Els teus missatges",
     "inboxCardSubtitle": "Llegeix els missatges rebuts del teu amic invisible.",
     "inboxCardCta": "Veure missatges",
+    "noNewMessages": "Cap missatge nou",
     "createdAt": "Creat el",
     "wishlist": "Llista de desitjos",
     "wishlistEmpty": "Encara no hi ha articles a la llista"

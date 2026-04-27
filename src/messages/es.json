@@ -9,7 +9,8 @@
     "overview": "Vista general",
     "messages": "Mensajes",
     "members": "Miembros",
-    "adminManage": "Administrar"
+    "adminManage": "Administrar",
+    "wishlist": "Lista de deseos"
   },
   "dashboard": {
     "title": "Mis grupos",
@@ -70,6 +71,7 @@
     "inboxCardTitle": "Tus mensajes",
     "inboxCardSubtitle": "Lee los mensajes recibidos de tu amigo invisible.",
     "inboxCardCta": "Ver mensajes",
+    "noNewMessages": "Sin mensajes nuevos",
     "createdAt": "Creado el",
     "wishlist": "Lista de deseos",
     "wishlistEmpty": "Aún no hay artículos en la lista"
