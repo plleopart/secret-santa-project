@@ -3,15 +3,27 @@
     "login": "Inicia sessió amb Google",
     "logout": "Tanca la sessió"
   },
+  "nav": {
+    "dashboard": "Inici",
+    "adminSection": "Admin"
+  },
   "dashboard": {
     "title": "Els meus grups",
-    "adminGroups": "Grups on soc administrador",
+    "adminGroups": "Grups que administro",
     "memberGroups": "Grups on participo",
-    "noGroups": "Encara no formes part de cap grup"
+    "noGroups": "Encara no formes part de cap grup",
+    "noGroupsHint": "Crea un grup nou o uneix-te a un existent."
   },
   "groups": {
     "create": "Crea un grup",
     "join": "Uneix-te a un grup",
+    "createGroup": "Crea un grup",
+    "joinGroup": "Uneix-te a un grup",
+    "viewGroup": "Veure el grup",
+    "backToDashboard": "Torna a l'inici",
+    "sendMessage": "Envia un missatge anònim",
+    "myMessages": "Els meus missatges",
+    "adminView": "Vista d'administrador",
     "inviteCode": "Codi d'invitació",
     "inviteCodePlaceholder": "Introdueix el codi de 6 caràcters",
     "drawPending": "Sorteig pendent",
@@ -19,23 +31,61 @@
     "doAutomaticDraw": "Fes el sorteig automàticament",
     "myRecipient": "El teu amic invisible és",
     "members": "{count} membres",
+    "membersSection": "Membres",
     "name": "Nom del grup",
     "namePlaceholder": "Ex: Família Nadal 2024",
     "drawMode": "Mode de sorteig",
     "drawModeAutomatic": "Automàtic",
-    "drawModeManual": "Manual"
+    "drawModeManual": "Manual",
+    "drawModePlaceholder": "Selecciona el mode",
+    "addMember": "Afegeix un membre",
+    "memberName": "Nom",
+    "memberEmail": "Correu electrònic",
+    "memberNamePlaceholder": "Ex: Anna Garcia",
+    "memberEmailPlaceholder": "Ex: anna@example.com",
+    "performDraw": "Fer el sorteig",
+    "confirmDraw": "Confirmar el sorteig",
+    "confirmDrawText": "Un cop fet el sorteig no es pot desfer. Vols continuar?",
+    "drawSection": "Sorteig",
+    "assignmentsSection": "Assignacions",
+    "manualAssignmentsHint": "Defineix qui regala a qui. Cada persona ha de regalar a una altra i no pot regalar-se a si mateixa.",
+    "saveAssignments": "Desa les assignacions",
+    "givesTo": "regala a",
+    "selectRecipient": "Selecciona el destinatari",
+    "myAssignment": "El teu amic invisible és",
+    "notEnoughMembers": "Cal tenir almenys 2 membres per fer el sorteig",
+    "errorAlreadyMember": "Ja ets membre d'aquest grup",
+    "errorInvalidCode": "Codi d'invitació no vàlid",
+    "errorSelfAssignment": "Una persona no es pot regalar a si mateixa",
+    "errorIncompleteAssignments": "Has de definir totes les assignacions"
   },
   "messages": {
     "inbox": "Safata d'entrada",
     "send": "Envia un missatge",
+    "sendButton": "Envia",
+    "sendSuccess": "Missatge enviat correctament",
     "placeholder": "Escriu el teu missatge anònim...",
     "sender": "🎅 Amic invisible",
     "noMessages": "Encara no has rebut cap missatge",
-    "unread": "{count} sense llegir"
+    "unread": "{count} sense llegir",
+    "to": "Per a",
+    "sentHistory": "Missatges enviats",
+    "adminMessages": "Missatges del grup",
+    "adminNoMessages": "Encara no hi ha missatges en aquest grup",
+    "reply": "Respon",
+    "replyPlaceholder": "Escriu la teva resposta anònima...",
+    "replySuccess": "Resposta enviada correctament",
+    "replyCredits": "{count} respostes disponibles",
+    "noReplyCredits": "Has esgotat les respostes. Espera un nou missatge de l'amic invisible.",
+    "noMessagesForReply": "Espera que el teu amic invisible et enviï un missatge per poder respondre.",
+    "youLabel": "Tu",
+    "conversation": "Conversa",
+    "isReply": "Resposta"
   },
   "errors": {
     "unauthorized": "No tens permisos per fer aquesta acció",
     "noAssignment": "No tens cap assignació en aquest grup",
-    "groupNotFound": "Grup no trobat"
+    "groupNotFound": "Grup no trobat",
+    "drawNotDone": "El sorteig encara no s'ha fet"
   }
 }

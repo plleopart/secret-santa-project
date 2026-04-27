@@ -21,9 +21,18 @@ export async function getGroupAssignments(groupId: string) {
   })
 }
 
-export async function getGroupMessages(_groupId: string) {
+export async function getGroupMessages(groupId: string) {
   const session = await auth()
   if (!session?.user?.id) throw new Error("Unauthenticated")
 
-  // TODO: implement (admin only)
+  const group = await prisma.group.findUnique({ where: { id: groupId } })
+  if (!group || group.adminId !== session.user.id) {
+    throw new Error("Admin permission required for this group")
+  }
+
+  return prisma.message.findMany({
+    where: { groupId },
+    include: { recipient: { select: { name: true } } },
+    orderBy: { createdAt: "asc" },
+  })
 }

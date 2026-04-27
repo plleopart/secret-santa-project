@@ -3,15 +3,27 @@
     "login": "Iniciar sesión con Google",
     "logout": "Cerrar sesión"
   },
+  "nav": {
+    "dashboard": "Inicio",
+    "adminSection": "Admin"
+  },
   "dashboard": {
     "title": "Mis grupos",
-    "adminGroups": "Grupos donde soy administrador",
+    "adminGroups": "Grupos que administro",
     "memberGroups": "Grupos donde participo",
-    "noGroups": "Aún no formas parte de ningún grupo"
+    "noGroups": "Aún no formas parte de ningún grupo",
+    "noGroupsHint": "Crea un grupo nuevo o únete a uno existente."
   },
   "groups": {
     "create": "Crear un grupo",
     "join": "Unirse a un grupo",
+    "createGroup": "Crear un grupo",
+    "joinGroup": "Unirse a un grupo",
+    "viewGroup": "Ver el grupo",
+    "backToDashboard": "Volver al inicio",
+    "sendMessage": "Enviar mensaje anónimo",
+    "myMessages": "Mis mensajes",
+    "adminView": "Vista de administrador",
     "inviteCode": "Código de invitación",
     "inviteCodePlaceholder": "Introduce el código de 6 caracteres",
     "drawPending": "Sorteo pendiente",
@@ -19,23 +31,61 @@
     "doAutomaticDraw": "Realizar el sorteo automáticamente",
     "myRecipient": "Tu amigo invisible es",
     "members": "{count} miembros",
+    "membersSection": "Miembros",
     "name": "Nombre del grupo",
     "namePlaceholder": "Ej: Familia Navidad 2024",
     "drawMode": "Modo de sorteo",
     "drawModeAutomatic": "Automático",
-    "drawModeManual": "Manual"
+    "drawModeManual": "Manual",
+    "drawModePlaceholder": "Selecciona el modo",
+    "addMember": "Añadir miembro",
+    "memberName": "Nombre",
+    "memberEmail": "Correo electrónico",
+    "memberNamePlaceholder": "Ej: Ana García",
+    "memberEmailPlaceholder": "Ej: ana@example.com",
+    "performDraw": "Realizar el sorteo",
+    "confirmDraw": "Confirmar el sorteo",
+    "confirmDrawText": "Una vez realizado el sorteo no se puede deshacer. ¿Quieres continuar?",
+    "drawSection": "Sorteo",
+    "assignmentsSection": "Asignaciones",
+    "manualAssignmentsHint": "Define quién regala a quién. Cada persona debe regalar a otra y no puede regalarse a sí misma.",
+    "saveAssignments": "Guardar asignaciones",
+    "givesTo": "regala a",
+    "selectRecipient": "Selecciona el destinatario",
+    "myAssignment": "Tu amigo invisible es",
+    "notEnoughMembers": "Se necesitan al menos 2 miembros para realizar el sorteo",
+    "errorAlreadyMember": "Ya eres miembro de este grupo",
+    "errorInvalidCode": "Código de invitación no válido",
+    "errorSelfAssignment": "Una persona no puede regalarse a sí misma",
+    "errorIncompleteAssignments": "Debes definir todas las asignaciones"
   },
   "messages": {
     "inbox": "Bandeja de entrada",
     "send": "Enviar un mensaje",
+    "sendButton": "Enviar",
+    "sendSuccess": "Mensaje enviado correctamente",
     "placeholder": "Escribe tu mensaje anónimo...",
     "sender": "🎅 Amigo invisible",
     "noMessages": "Aún no has recibido ningún mensaje",
-    "unread": "{count} sin leer"
+    "unread": "{count} sin leer",
+    "to": "Para",
+    "sentHistory": "Mensajes enviados",
+    "adminMessages": "Mensajes del grupo",
+    "adminNoMessages": "Aún no hay mensajes en este grupo",
+    "reply": "Responder",
+    "replyPlaceholder": "Escribe tu respuesta anónima...",
+    "replySuccess": "Respuesta enviada correctamente",
+    "replyCredits": "{count} respuestas disponibles",
+    "noReplyCredits": "Has agotado las respuestas. Espera un nuevo mensaje del amigo invisible.",
+    "noMessagesForReply": "Espera a que tu amigo invisible te envíe un mensaje para poder responder.",
+    "youLabel": "Tú",
+    "conversation": "Conversación",
+    "isReply": "Respuesta"
   },
   "errors": {
     "unauthorized": "No tienes permisos para realizar esta acción",
     "noAssignment": "No tienes ninguna asignación en este grupo",
-    "groupNotFound": "Grupo no encontrado"
+    "groupNotFound": "Grupo no encontrado",
+    "drawNotDone": "El sorteo aún no se ha realizado"
   }
 }

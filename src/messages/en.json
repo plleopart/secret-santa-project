@@ -3,15 +3,27 @@
     "login": "Sign in with Google",
     "logout": "Sign out"
   },
+  "nav": {
+    "dashboard": "Home",
+    "adminSection": "Admin"
+  },
   "dashboard": {
     "title": "My groups",
     "adminGroups": "Groups I administer",
     "memberGroups": "Groups I participate in",
-    "noGroups": "You are not part of any group yet"
+    "noGroups": "You are not part of any group yet",
+    "noGroupsHint": "Create a new group or join an existing one."
   },
   "groups": {
     "create": "Create a group",
     "join": "Join a group",
+    "createGroup": "Create a group",
+    "joinGroup": "Join a group",
+    "viewGroup": "View group",
+    "backToDashboard": "Back to home",
+    "sendMessage": "Send anonymous message",
+    "myMessages": "My messages",
+    "adminView": "Admin view",
     "inviteCode": "Invite code",
     "inviteCodePlaceholder": "Enter the 6-character code",
     "drawPending": "Draw pending",
@@ -19,23 +31,61 @@
     "doAutomaticDraw": "Perform automatic draw",
     "myRecipient": "Your secret santa is",
     "members": "{count} members",
+    "membersSection": "Members",
     "name": "Group name",
     "namePlaceholder": "E.g. Family Christmas 2024",
     "drawMode": "Draw mode",
     "drawModeAutomatic": "Automatic",
-    "drawModeManual": "Manual"
+    "drawModeManual": "Manual",
+    "drawModePlaceholder": "Select mode",
+    "addMember": "Add member",
+    "memberName": "Name",
+    "memberEmail": "Email",
+    "memberNamePlaceholder": "E.g. Anna Smith",
+    "memberEmailPlaceholder": "E.g. anna@example.com",
+    "performDraw": "Perform draw",
+    "confirmDraw": "Confirm draw",
+    "confirmDrawText": "Once the draw is done it cannot be undone. Do you want to continue?",
+    "drawSection": "Draw",
+    "assignmentsSection": "Assignments",
+    "manualAssignmentsHint": "Define who gives to whom. Each person must give to another and cannot give to themselves.",
+    "saveAssignments": "Save assignments",
+    "givesTo": "gives to",
+    "selectRecipient": "Select recipient",
+    "myAssignment": "Your secret santa is",
+    "notEnoughMembers": "At least 2 members are needed to perform the draw",
+    "errorAlreadyMember": "You are already a member of this group",
+    "errorInvalidCode": "Invalid invite code",
+    "errorSelfAssignment": "A person cannot give to themselves",
+    "errorIncompleteAssignments": "You must define all assignments"
   },
   "messages": {
     "inbox": "Inbox",
     "send": "Send a message",
+    "sendButton": "Send",
+    "sendSuccess": "Message sent successfully",
     "placeholder": "Write your anonymous message...",
     "sender": "🎅 Secret Santa",
     "noMessages": "You have not received any messages yet",
-    "unread": "{count} unread"
+    "unread": "{count} unread",
+    "to": "To",
+    "sentHistory": "Sent messages",
+    "adminMessages": "Group messages",
+    "adminNoMessages": "No messages in this group yet",
+    "reply": "Reply",
+    "replyPlaceholder": "Write your anonymous reply...",
+    "replySuccess": "Reply sent successfully",
+    "replyCredits": "{count} replies available",
+    "noReplyCredits": "You have used all your replies. Wait for a new message.",
+    "noMessagesForReply": "Wait for your secret santa to send you a message before replying.",
+    "youLabel": "You",
+    "conversation": "Conversation",
+    "isReply": "Reply"
   },
   "errors": {
     "unauthorized": "You do not have permission to perform this action",
     "noAssignment": "You have no assignment in this group",
-    "groupNotFound": "Group not found"
+    "groupNotFound": "Group not found",
+    "drawNotDone": "The draw has not been done yet"
   }
 }

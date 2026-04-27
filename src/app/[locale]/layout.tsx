@@ -1,9 +1,14 @@
 import "@mantine/core/styles.css"
-import { MantineProvider, ColorSchemeScript } from "@mantine/core"
+import { MantineProvider } from "@mantine/core"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { routing } from "@/i18n/routing"
+import { theme } from "@/lib/theme"
+
+// Inline equivalent of Mantine's ColorSchemeScript for defaultColorScheme="auto".
+// Rendered from a Server Component to avoid React 19's "script in client component" warning.
+const colorSchemeScript = `try{var _c=window.localStorage.getItem("mantine-color-scheme-value");var c=_c==="light"||_c==="dark"||_c==="auto"?_c:"auto";var d=c!=="auto"?c:window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-mantine-color-scheme",d)}catch(e){}`
 
 type Props = {
   children: React.ReactNode
@@ -20,12 +25,12 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages()
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <head>
-        <ColorSchemeScript />
+        <script data-mantine-script dangerouslySetInnerHTML={{ __html: colorSchemeScript }} />
       </head>
       <body>
-        <MantineProvider>
+        <MantineProvider theme={theme} defaultColorScheme="auto">
           <NextIntlClientProvider messages={messages}>
             {children}
           </NextIntlClientProvider>

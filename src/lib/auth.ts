@@ -13,14 +13,25 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
   ],
   callbacks: {
-    async signIn({ user, account, profile }) {
-      if (!profile?.sub || !user.email || !user.name) return false
+    async signIn({ user, profile }) {
+      if (!profile?.sub || !user.email) return false
 
-      await prisma.user.upsert({
-        where: { keycloakId: profile.sub },
-        update: { email: user.email, name: user.name },
-        create: { keycloakId: profile.sub, email: user.email, name: user.name },
-      })
+      const name = user.name || (profile as { name?: string }).name || user.email
+      const email = user.email.toLowerCase()
+
+      try {
+        // Upsert by email so that guest users (added by admin before login) get their
+        // keycloakId promoted to the real Keycloak sub. ON UPDATE CASCADE propagates
+        // the change to all FK references (group_members, assignments, messages).
+        await prisma.user.upsert({
+          where: { email },
+          update: { keycloakId: profile.sub, name },
+          create: { keycloakId: profile.sub, email, name },
+        })
+      } catch (err) {
+        console.error("[auth] signIn upsert failed:", err)
+        return false
+      }
 
       return true
     },
