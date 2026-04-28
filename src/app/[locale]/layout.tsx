@@ -3,6 +3,7 @@ import { MantineProvider } from "@mantine/core"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
 import { notFound } from "next/navigation"
+import Script from "next/script"
 import { routing } from "@/i18n/routing"
 import { theme } from "@/lib/theme"
 
@@ -27,7 +28,9 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <script data-mantine-script dangerouslySetInnerHTML={{ __html: colorSchemeScript }} />
+        <Script id="mantine-color-scheme" strategy="beforeInteractive">
+          {colorSchemeScript}
+        </Script>
       </head>
       <body>
         <MantineProvider theme={theme} defaultColorScheme="auto">

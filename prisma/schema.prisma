@@ -22,6 +22,7 @@ model User {
   giverOf     Assignment[] @relation("Giver")
   receiverOf  Assignment[] @relation("Receiver")
   messages    Message[]    @relation("Recipient")
+  wishlist    WishlistItem[]
 
   @@map("users")
 }
@@ -39,6 +40,7 @@ model Group {
   members     GroupMember[]
   assignments Assignment[]
   messages    Message[]
+  wishlist    WishlistItem[]
 
   @@map("groups")
 }
@@ -85,4 +87,23 @@ model Message {
   // No senderId — anonymity guaranteed at the data level
 
   @@map("messages")
+}
+
+model WishlistItem {
+  id          String    @id @default(uuid())
+  groupId     String    @map("group_id")
+  userId      String    @map("user_id")
+  name        String
+  description String?
+  url         String?
+  priority    Int       @default(1)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  group Group @relation(fields: [groupId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  user  User  @relation(fields: [userId], references: [keycloakId], onDelete: Restrict, onUpdate: Cascade)
+
+  @@index([groupId, userId])
+  @@index([groupId, userId, priority])
+  @@map("wishlist_items")
 }

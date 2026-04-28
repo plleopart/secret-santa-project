@@ -10,7 +10,9 @@
     "messages": "Messages",
     "members": "Members",
     "adminManage": "Manage",
-    "wishlist": "Wish list"
+    "wishlist": "Wish list",
+    "myWishlist": "My wishes",
+    "recipientWishlist": "Wishes of the person I gift"
   },
   "dashboard": {
     "title": "My groups",
@@ -101,6 +103,33 @@
     "youLabel": "You",
     "conversation": "Conversation",
     "isReply": "Reply"
+  },
+  "wishlist": {
+    "myList": "My wish list",
+    "count": "{count} items",
+    "name": "Name",
+    "namePlaceholder": "E.g. Bluetooth headphones",
+    "description": "Description",
+    "descriptionPlaceholder": "Optional details about the gift",
+    "url": "URL",
+    "urlPlaceholder": "https://...",
+    "add": "Add wish",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "priority": "Priority {value}",
+    "emptyOwn": "You have not added any wishes yet.",
+    "recipientListTitle": "Wish list of the person you give to",
+    "recipientPending": "This list will be available after the draw.",
+    "emptyRecipient": "{name} has not added any wishes yet.",
+    "invalidUrl": "The URL is not valid.",
+    "nameRequired": "Wish name is required.",
+    "nameTooLong": "Wish name is too long.",
+    "descriptionTooLong": "Description is too long.",
+    "genericError": "An unexpected error occurred."
   },
   "errors": {
     "unauthorized": "You do not have permission to perform this action",

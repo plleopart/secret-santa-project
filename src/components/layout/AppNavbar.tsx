@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import {
   Stack,
   Text,
@@ -53,6 +54,10 @@ export function AppNavbar({ userName, userEmail, navGroups }: Props) {
   const currentGroup = currentGroupId ? navGroups.find((g) => g.id === currentGroupId) : null
   const isInAdminView =
     currentGroupId !== null && pathname.startsWith(`/groups/${currentGroupId}/admin`)
+  const isWishlistPath =
+    currentGroupId !== null && pathname.startsWith(`/groups/${currentGroupId}/wishlist`)
+  const [isWishlistOpenManually, setIsWishlistOpenManually] = useState(false)
+  const isWishlistOpen = isWishlistPath || isWishlistOpenManually
 
   return (
     <Stack h="100%" justify="space-between" p="md" gap={0}>
@@ -133,16 +138,38 @@ export function AppNavbar({ userName, userEmail, navGroups }: Props) {
             <NavLink
               label={t("nav.wishlist")}
               leftSection={<IconGift size={15} />}
-              active={pathname.startsWith(`/groups/${currentGroupId}/wishlist`)}
-              renderRoot={(props) => (
-                <Link
-                  href={`/groups/${currentGroupId}/wishlist`}
-                  style={{ textDecoration: "none" }}
-                  {...props}
-                />
-              )}
+              active={isWishlistPath}
+              opened={isWishlistOpen}
+              onClick={() => setIsWishlistOpenManually((open) => !open)}
+              childrenOffset={28}
               styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
-            />
+            >
+              <NavLink
+                label={t("nav.myWishlist")}
+                active={pathname === `/groups/${currentGroupId}/wishlist/my`}
+                renderRoot={(props) => (
+                  <Link
+                    href={`/groups/${currentGroupId}/wishlist/my`}
+                    style={{ textDecoration: "none" }}
+                    {...props}
+                  />
+                )}
+                styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
+              />
+
+              <NavLink
+                label={t("nav.recipientWishlist")}
+                active={pathname === `/groups/${currentGroupId}/wishlist/recipient`}
+                renderRoot={(props) => (
+                  <Link
+                    href={`/groups/${currentGroupId}/wishlist/recipient`}
+                    style={{ textDecoration: "none" }}
+                    {...props}
+                  />
+                )}
+                styles={{ root: { borderRadius: "var(--mantine-radius-md)" } }}
+              />
+            </NavLink>
 
           </Box>
         )}

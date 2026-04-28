@@ -10,7 +10,9 @@
     "messages": "Mensajes",
     "members": "Miembros",
     "adminManage": "Administrar",
-    "wishlist": "Lista de deseos"
+    "wishlist": "Lista de deseos",
+    "myWishlist": "Mis deseos",
+    "recipientWishlist": "Deseos de quien debo regalar"
   },
   "dashboard": {
     "title": "Mis grupos",
@@ -101,6 +103,33 @@
     "youLabel": "Tú",
     "conversation": "Conversación",
     "isReply": "Respuesta"
+  },
+  "wishlist": {
+    "myList": "Mi lista de deseos",
+    "count": "{count} artículos",
+    "name": "Nombre",
+    "namePlaceholder": "Ej: Auriculares Bluetooth",
+    "description": "Descripción",
+    "descriptionPlaceholder": "Detalles opcionales sobre el regalo",
+    "url": "URL",
+    "urlPlaceholder": "https://...",
+    "add": "Añadir deseo",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "moveUp": "Subir prioridad",
+    "moveDown": "Bajar prioridad",
+    "priority": "Prioridad {value}",
+    "emptyOwn": "Aún no has añadido ningún deseo.",
+    "recipientListTitle": "Lista de la persona a la que regalas",
+    "recipientPending": "Esta lista estará disponible cuando se realice el sorteo.",
+    "emptyRecipient": "{name} aún no ha añadido ningún deseo.",
+    "invalidUrl": "La URL no es válida.",
+    "nameRequired": "El nombre del deseo es obligatorio.",
+    "nameTooLong": "El nombre del deseo es demasiado largo.",
+    "descriptionTooLong": "La descripción es demasiado larga.",
+    "genericError": "Se ha producido un error inesperado."
   },
   "errors": {
     "unauthorized": "No tienes permisos para realizar esta acción",

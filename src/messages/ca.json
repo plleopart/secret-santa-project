@@ -10,7 +10,9 @@
     "messages": "Missatges",
     "members": "Membres",
     "adminManage": "Administrar",
-    "wishlist": "Llista de desitjos"
+    "wishlist": "Llista de desitjos",
+    "myWishlist": "Els meus desitjos",
+    "recipientWishlist": "Desitjos del destinatari"
   },
   "dashboard": {
     "title": "Els meus grups",
@@ -101,6 +103,33 @@
     "youLabel": "Tu",
     "conversation": "Conversa",
     "isReply": "Resposta"
+  },
+  "wishlist": {
+    "myList": "La meva llista",
+    "count": "{count} articles",
+    "name": "Nom",
+    "namePlaceholder": "Ex: Auriculars Bluetooth",
+    "description": "Descripció",
+    "descriptionPlaceholder": "Detalls opcionals sobre el regal",
+    "url": "URL",
+    "urlPlaceholder": "https://...",
+    "add": "Afegeix desig",
+    "save": "Desa",
+    "cancel": "Cancel·la",
+    "edit": "Edita",
+    "delete": "Elimina",
+    "moveUp": "Puja prioritat",
+    "moveDown": "Baixa prioritat",
+    "priority": "Prioritat {value}",
+    "emptyOwn": "Encara no has afegit cap desig.",
+    "recipientListTitle": "Llista de la persona que et toca regalar",
+    "recipientPending": "La llista estarà disponible quan es faci el sorteig.",
+    "emptyRecipient": "{name} encara no ha afegit cap desig.",
+    "invalidUrl": "La URL no és vàlida.",
+    "nameRequired": "El nom del desig és obligatori.",
+    "nameTooLong": "El nom del desig és massa llarg.",
+    "descriptionTooLong": "La descripció és massa llarga.",
+    "genericError": "S'ha produït un error inesperat."
   },
   "errors": {
     "unauthorized": "No tens permisos per fer aquesta acció",
