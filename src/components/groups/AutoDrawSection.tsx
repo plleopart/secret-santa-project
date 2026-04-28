@@ -66,6 +66,8 @@ export function AutoDrawSection({
       closeConfirm()
       const msg = e instanceof Error ? e.message : ""
       if (msg === "Not enough members") setError(t("notEnoughMembers"))
+      else if (msg === "No valid assignments with restrictions")
+        setError(t("restrictionNoSolutionError"))
       else setError(msg)
     } finally {
       setLoading(false)

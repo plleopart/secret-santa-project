@@ -1,4 +1,7 @@
 {
+  "app": {
+    "name": "Whispr"
+  },
   "auth": {
     "login": "Iniciar sesión con Google",
     "logout": "Cerrar sesión"
@@ -59,6 +62,7 @@
     "saveAssignments": "Guardar asignaciones",
     "givesTo": "regala a",
     "selectRecipient": "Selecciona el destinatario",
+    "drawAlreadyDone": "El sorteo ya está realizado",
     "myAssignment": "Tu amigo invisible es",
     "notEnoughMembers": "Se necesitan al menos 2 miembros para realizar el sorteo",
     "errorAlreadyMember": "Ya eres miembro de este grupo",
@@ -76,7 +80,22 @@
     "noNewMessages": "Sin mensajes nuevos",
     "createdAt": "Creado el",
     "wishlist": "Lista de deseos",
-    "wishlistEmpty": "Aún no hay artículos en la lista"
+    "wishlistEmpty": "Aún no hay artículos en la lista",
+    "restrictionsTitle": "Restricciones avanzadas",
+    "restrictionsHint": "Define parejas prohibidas (quién no puede regalar a quién). El sorteo automático y manual las respetará.",
+    "restrictionGiver": "Quién regala",
+    "restrictionGiverPlaceholder": "Selecciona quién regala",
+    "restrictionReceiver": "No puede regalar a",
+    "restrictionReceiverPlaceholder": "Selecciona destinatario prohibido",
+    "addRestriction": "Añadir restricción",
+    "removeRestriction": "Eliminar restricción",
+    "restrictionArrow": "no puede regalar a",
+    "restrictionDuplicateError": "Esta restricción ya existe.",
+    "restrictionSelfError": "No se pueden crear restricciones con la misma persona.",
+    "restrictionInvalidMembersError": "La restricción incluye miembros no válidos.",
+    "restrictionUnauthorizedError": "No tienes permisos para gestionar restricciones.",
+    "restrictionNoSolutionError": "Con las restricciones actuales no existe ningún sorteo válido posible.",
+    "restrictionAssignmentError": "La asignación manual incumple una restricción configurada."
   },
   "adminPage": {
     "noGroups": "Aún no administras ningún grupo"

@@ -95,6 +95,13 @@ export async function getGroup(groupId: string) {
           receiver: true,
         },
       },
+      drawRestrictions: {
+        include: {
+          giver: true,
+          receiver: true,
+        },
+        orderBy: { createdAt: "asc" },
+      },
     },
   })
 

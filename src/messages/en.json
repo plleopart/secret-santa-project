@@ -1,4 +1,7 @@
 {
+  "app": {
+    "name": "Whispr"
+  },
   "auth": {
     "login": "Sign in with Google",
     "logout": "Sign out"
@@ -59,6 +62,7 @@
     "saveAssignments": "Save assignments",
     "givesTo": "gives to",
     "selectRecipient": "Select recipient",
+    "drawAlreadyDone": "The draw is already done",
     "myAssignment": "Your secret santa is",
     "notEnoughMembers": "At least 2 members are needed to perform the draw",
     "errorAlreadyMember": "You are already a member of this group",
@@ -76,7 +80,22 @@
     "noNewMessages": "No new messages",
     "createdAt": "Created on",
     "wishlist": "Wish list",
-    "wishlistEmpty": "No items in the wish list yet"
+    "wishlistEmpty": "No items in the wish list yet",
+    "restrictionsTitle": "Advanced restrictions",
+    "restrictionsHint": "Define forbidden pairs (who cannot gift whom). Automatic and manual draw will enforce them.",
+    "restrictionGiver": "Giver",
+    "restrictionGiverPlaceholder": "Select giver",
+    "restrictionReceiver": "Cannot gift to",
+    "restrictionReceiverPlaceholder": "Select forbidden recipient",
+    "addRestriction": "Add restriction",
+    "removeRestriction": "Remove restriction",
+    "restrictionArrow": "cannot gift to",
+    "restrictionDuplicateError": "This restriction already exists.",
+    "restrictionSelfError": "Cannot create self-restrictions.",
+    "restrictionInvalidMembersError": "Restriction includes invalid members.",
+    "restrictionUnauthorizedError": "You are not allowed to manage restrictions.",
+    "restrictionNoSolutionError": "With the current restrictions, no valid draw is possible.",
+    "restrictionAssignmentError": "The manual assignment violates a configured restriction."
   },
   "adminPage": {
     "noGroups": "You don't administer any groups yet"

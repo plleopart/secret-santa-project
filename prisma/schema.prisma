@@ -23,6 +23,8 @@ model User {
   receiverOf  Assignment[] @relation("Receiver")
   messages    Message[]    @relation("Recipient")
   wishlist    WishlistItem[]
+  givenRestrictions    DrawRestriction[] @relation("RestrictionGiver")
+  receivedRestrictions DrawRestriction[] @relation("RestrictionReceiver")
 
   @@map("users")
 }
@@ -41,6 +43,7 @@ model Group {
   assignments Assignment[]
   messages    Message[]
   wishlist    WishlistItem[]
+  drawRestrictions DrawRestriction[]
 
   @@map("groups")
 }
@@ -106,4 +109,21 @@ model WishlistItem {
   @@index([groupId, userId])
   @@index([groupId, userId, priority])
   @@map("wishlist_items")
+}
+
+model DrawRestriction {
+  id         String   @id @default(uuid())
+  groupId    String   @map("group_id")
+  giverId    String   @map("giver_id")
+  receiverId String   @map("receiver_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  group    Group @relation(fields: [groupId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  giver    User  @relation("RestrictionGiver", fields: [giverId], references: [keycloakId], onDelete: Restrict, onUpdate: Cascade)
+  receiver User  @relation("RestrictionReceiver", fields: [receiverId], references: [keycloakId], onDelete: Restrict, onUpdate: Cascade)
+
+  @@unique([groupId, giverId, receiverId])
+  @@index([groupId])
+  @@index([groupId, giverId])
+  @@map("draw_restrictions")
 }

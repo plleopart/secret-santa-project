@@ -12,6 +12,7 @@ import {
   Button,
   Box,
   Badge,
+  ThemeIcon,
 } from "@mantine/core"
 import { useMantineColorScheme } from "@mantine/core"
 import { useTranslations } from "next-intl"
@@ -27,6 +28,7 @@ import {
   IconMail,
   IconUsers,
   IconGift,
+  IconMessageCircle,
 } from "@tabler/icons-react"
 
 interface NavGroup {
@@ -62,9 +64,14 @@ export function AppNavbar({ userName, userEmail, navGroups }: Props) {
   return (
     <Stack h="100%" justify="space-between" p="md" gap={0}>
       <Box>
-        <Text fw={700} size="lg" mb="xl" style={{ letterSpacing: "-0.3px" }}>
-          🎅 Amic Invisible
-        </Text>
+        <Group gap="xs" mb="xl" align="center">
+          <ThemeIcon color="blue" variant="light" radius="xl" size="md">
+            <IconMessageCircle size={16} />
+          </ThemeIcon>
+          <Text fw={700} size="lg" style={{ letterSpacing: "-0.3px" }}>
+            {t("app.name")}
+          </Text>
+        </Group>
 
         <NavLink
           label={t("nav.dashboard")}

@@ -35,11 +35,17 @@ interface Assignment {
   receiver: { name: string; email: string }
 }
 
+interface Restriction {
+  giverId: string
+  receiverId: string
+}
+
 interface Props {
   groupId: string
   members: Member[]
   assignments: Assignment[]
   drawnAt: Date | null
+  restrictions: Restriction[]
 }
 
 export function ManualAssignmentEditor({
@@ -47,6 +53,7 @@ export function ManualAssignmentEditor({
   members,
   assignments,
   drawnAt,
+  restrictions,
 }: Props) {
   const t = useTranslations("groups")
   const router = useRouter()
@@ -59,6 +66,10 @@ export function ManualAssignmentEditor({
 
   const usedReceivers = new Set(Object.values(pairs).filter(Boolean))
 
+  const restrictedPairs = new Set(
+    restrictions.map((restriction) => `${restriction.giverId}:${restriction.receiverId}`)
+  )
+
   const getOptions = (currentGiverId: string) =>
     members
       .filter((m) => m.userId !== currentGiverId)
@@ -66,6 +77,7 @@ export function ManualAssignmentEditor({
         value: m.userId,
         label: m.user.name,
         disabled:
+          restrictedPairs.has(`${currentGiverId}:${m.userId}`) ||
           usedReceivers.has(m.userId) && pairs[currentGiverId] !== m.userId,
       }))
 
@@ -86,6 +98,8 @@ export function ManualAssignmentEditor({
       const msg = e instanceof Error ? e.message : ""
       if (msg.includes("Self-assignment")) setError(t("errorSelfAssignment"))
       else if (msg.includes("Incomplete")) setError(t("errorIncompleteAssignments"))
+      else if (msg.includes("Restricted assignment"))
+        setError(t("restrictionAssignmentError"))
       else setError(msg)
     } finally {
       setLoading(false)

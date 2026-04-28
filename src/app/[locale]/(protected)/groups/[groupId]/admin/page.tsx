@@ -18,6 +18,7 @@ import { AddMemberModal } from "@/components/groups/AddMemberModal"
 import { AutoDrawSection } from "@/components/groups/AutoDrawSection"
 import { ManualAssignmentEditor } from "@/components/groups/ManualAssignmentEditor"
 import { InviteCodeBadge } from "@/components/groups/InviteCodeBadge"
+import { DrawRestrictionsEditor } from "@/components/groups/DrawRestrictionsEditor"
 import {
   IconArrowLeft,
   IconArrowRight,
@@ -143,19 +144,36 @@ export default async function AdminPage({
         />
 
         {group.drawMode === "automatic" ? (
-          <AutoDrawSection
-            groupId={group.id}
-            members={group.members}
-            assignments={group.assignments}
-            drawnAt={group.drawnAt}
-          />
+          <Stack gap="md">
+            <DrawRestrictionsEditor
+              groupId={group.id}
+              members={group.members}
+              restrictions={group.drawRestrictions}
+              drawnAt={group.drawnAt}
+            />
+            <AutoDrawSection
+              groupId={group.id}
+              members={group.members}
+              assignments={group.assignments}
+              drawnAt={group.drawnAt}
+            />
+          </Stack>
         ) : (
-          <ManualAssignmentEditor
-            groupId={group.id}
-            members={group.members}
-            assignments={group.assignments}
-            drawnAt={group.drawnAt}
-          />
+          <Stack gap="md">
+            <DrawRestrictionsEditor
+              groupId={group.id}
+              members={group.members}
+              restrictions={group.drawRestrictions}
+              drawnAt={group.drawnAt}
+            />
+            <ManualAssignmentEditor
+              groupId={group.id}
+              members={group.members}
+              assignments={group.assignments}
+              drawnAt={group.drawnAt}
+              restrictions={group.drawRestrictions}
+            />
+          </Stack>
         )}
       </Stack>
 

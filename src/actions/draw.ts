@@ -3,23 +3,68 @@
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 
-function generateDerangement(
-  ids: string[]
+function shuffle<T>(input: T[]): T[] {
+  const arr = [...input]
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[arr[i], arr[j]] = [arr[j], arr[i]]
+  }
+  return arr
+}
+
+function generateAssignmentsWithRestrictions(
+  ids: string[],
+  blockedPairs: Set<string>
 ): { giverId: string; receiverId: string }[] {
-  const n = ids.length
-  if (n < 2) throw new Error("Not enough members")
+  if (ids.length < 2) throw new Error("Not enough members")
 
-  let receivers: string[]
-  // Retry until no self-assignment (converges in ~1.58 tries on average)
-  do {
-    receivers = [...ids]
-    for (let i = n - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[receivers[i], receivers[j]] = [receivers[j], receivers[i]]
+  const assignments: { giverId: string; receiverId: string }[] = []
+  const usedReceivers = new Set<string>()
+  const givers = shuffle(ids)
+
+  function canAssign(giverId: string, receiverId: string): boolean {
+    if (giverId === receiverId) return false
+    if (usedReceivers.has(receiverId)) return false
+    if (blockedPairs.has(`${giverId}:${receiverId}`)) return false
+    return true
+  }
+
+  function backtrack(index: number): boolean {
+    if (index === givers.length) return true
+
+    const giverId = givers[index]
+    const candidates = shuffle(ids).filter((receiverId) =>
+      canAssign(giverId, receiverId)
+    )
+
+    for (const receiverId of candidates) {
+      assignments.push({ giverId, receiverId })
+      usedReceivers.add(receiverId)
+
+      if (backtrack(index + 1)) return true
+
+      assignments.pop()
+      usedReceivers.delete(receiverId)
     }
-  } while (receivers.some((r, i) => r === ids[i]))
 
-  return ids.map((giverId, i) => ({ giverId, receiverId: receivers[i] }))
+    return false
+  }
+
+  const found = backtrack(0)
+  if (!found) throw new Error("No valid assignments with restrictions")
+
+  return assignments
+}
+
+function validateAssignmentsAgainstRestrictions(
+  assignments: { giverId: string; receiverId: string }[],
+  blockedPairs: Set<string>
+) {
+  for (const assignment of assignments) {
+    if (blockedPairs.has(`${assignment.giverId}:${assignment.receiverId}`)) {
+      throw new Error("Restricted assignment")
+    }
+  }
 }
 
 export async function performDraw(groupId: string) {
@@ -38,7 +83,16 @@ export async function performDraw(groupId: string) {
   if (group.members.length < 2) throw new Error("Not enough members")
 
   const memberIds = group.members.map((m) => m.userId)
-  const assignments = generateDerangement(memberIds)
+  const restrictions = await prisma.drawRestriction.findMany({
+    where: { groupId },
+    select: { giverId: true, receiverId: true },
+  })
+
+  const blockedPairs = new Set(
+    restrictions.map((restriction) => `${restriction.giverId}:${restriction.receiverId}`)
+  )
+
+  const assignments = generateAssignmentsWithRestrictions(memberIds, blockedPairs)
 
   await prisma.$transaction([
     prisma.assignment.createMany({
@@ -73,6 +127,14 @@ export async function setManualAssignments(
   if (group.drawMode !== "manual") throw new Error("Wrong draw mode")
 
   const memberIds = new Set(group.members.map((m) => m.userId))
+  const restrictions = await prisma.drawRestriction.findMany({
+    where: { groupId },
+    select: { giverId: true, receiverId: true },
+  })
+
+  const blockedPairs = new Set(
+    restrictions.map((restriction) => `${restriction.giverId}:${restriction.receiverId}`)
+  )
 
   if (assignments.length !== group.members.length)
     throw new Error("Incomplete assignments")
@@ -90,6 +152,8 @@ export async function setManualAssignments(
     receiverSet.add(a.receiverId)
   }
 
+  validateAssignmentsAgainstRestrictions(assignments, blockedPairs)
+
   await prisma.$transaction([
     prisma.assignment.createMany({
       data: assignments.map((a) => ({
@@ -103,4 +167,57 @@ export async function setManualAssignments(
       data: { drawnAt: new Date() },
     }),
   ])
+}
+
+export async function addDrawRestriction(
+  groupId: string,
+  giverId: string,
+  receiverId: string
+) {
+  const session = await auth()
+  if (!session?.user?.id) throw new Error("Unauthenticated")
+
+  if (giverId === receiverId) throw new Error("Self-restriction not allowed")
+
+  const group = await prisma.group.findUnique({
+    where: { id: groupId },
+    include: { members: true },
+  })
+
+  if (!group) throw new Error("Group not found")
+  if (group.adminId !== session.user.id) throw new Error("Unauthorized")
+  if (group.drawnAt) throw new Error("Draw already done")
+
+  const memberIds = new Set(group.members.map((member) => member.userId))
+  if (!memberIds.has(giverId) || !memberIds.has(receiverId)) {
+    throw new Error("Invalid members for restriction")
+  }
+
+  await prisma.drawRestriction.create({
+    data: {
+      groupId,
+      giverId,
+      receiverId,
+    },
+  })
+}
+
+export async function removeDrawRestriction(groupId: string, restrictionId: string) {
+  const session = await auth()
+  if (!session?.user?.id) throw new Error("Unauthenticated")
+
+  const group = await prisma.group.findUnique({ where: { id: groupId } })
+  if (!group) throw new Error("Group not found")
+  if (group.adminId !== session.user.id) throw new Error("Unauthorized")
+  if (group.drawnAt) throw new Error("Draw already done")
+
+  const restriction = await prisma.drawRestriction.findUnique({
+    where: { id: restrictionId },
+  })
+
+  if (!restriction || restriction.groupId !== groupId) {
+    throw new Error("Restriction not found")
+  }
+
+  await prisma.drawRestriction.delete({ where: { id: restrictionId } })
 }

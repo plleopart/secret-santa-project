@@ -1,4 +1,7 @@
 {
+  "app": {
+    "name": "Whispr"
+  },
   "auth": {
     "login": "Inicia sessió amb Google",
     "logout": "Tanca la sessió"
@@ -59,6 +62,7 @@
     "saveAssignments": "Desa les assignacions",
     "givesTo": "regala a",
     "selectRecipient": "Selecciona el destinatari",
+    "drawAlreadyDone": "El sorteig ja està fet",
     "myAssignment": "El teu amic invisible és",
     "notEnoughMembers": "Cal tenir almenys 2 membres per fer el sorteig",
     "errorAlreadyMember": "Ja ets membre d'aquest grup",
@@ -76,7 +80,22 @@
     "noNewMessages": "Cap missatge nou",
     "createdAt": "Creat el",
     "wishlist": "Llista de desitjos",
-    "wishlistEmpty": "Encara no hi ha articles a la llista"
+    "wishlistEmpty": "Encara no hi ha articles a la llista",
+    "restrictionsTitle": "Restriccions avançades",
+    "restrictionsHint": "Defineix parelles prohibides (qui no pot regalar a qui). El sorteig automàtic i manual les respectaran.",
+    "restrictionGiver": "Qui regala",
+    "restrictionGiverPlaceholder": "Selecciona qui regala",
+    "restrictionReceiver": "No pot regalar a",
+    "restrictionReceiverPlaceholder": "Selecciona destinatari prohibit",
+    "addRestriction": "Afegeix restricció",
+    "removeRestriction": "Elimina restricció",
+    "restrictionArrow": "no pot regalar a",
+    "restrictionDuplicateError": "Aquesta restricció ja existeix.",
+    "restrictionSelfError": "No es poden crear restriccions amb la mateixa persona.",
+    "restrictionInvalidMembersError": "La restricció conté membres no vàlids.",
+    "restrictionUnauthorizedError": "No tens permisos per gestionar restriccions.",
+    "restrictionNoSolutionError": "Amb les restriccions actuals no hi ha cap sorteig vàlid possible.",
+    "restrictionAssignmentError": "L'assignació manual incompleix una restricció configurada."
   },
   "adminPage": {
     "noGroups": "Encara no administres cap grup"
